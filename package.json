@@ -1,0 +1,20 @@
+{
+  "name": "rs-dach-fassadenreinigung",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Website für RS Dach- und Fassadenreinigung, Mauerstetten",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@fontsource-variable/inter": "^5.3.0",
+    "gsap": "^3.15.0",
+    "lenis": "^1.3.26"
+  },
+  "devDependencies": {
+    "vite": "^8.3.1"
+  }
+}

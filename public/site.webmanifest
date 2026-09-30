@@ -1,0 +1,8 @@
+{
+  "name": "RS Dach- und Fassadenreinigung",
+  "short_name": "RS Reinigung",
+  "icons": [{ "src": "/logo.jpg", "sizes": "150x150", "type": "image/jpeg" }],
+  "theme_color": "#000000",
+  "background_color": "#000000",
+  "display": "standalone"
+}

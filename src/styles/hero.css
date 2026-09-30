@@ -1,0 +1,319 @@
+/* ---------- Hero ---------- */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+  isolation: isolate;
+}
+
+.hero__sky {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+}
+
+.hero__glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  will-change: transform;
+}
+
+.hero__glow--a {
+  width: 90vw;
+  height: 60vw;
+  left: 5vw;
+  bottom: -18vw;
+  background: radial-gradient(closest-side, rgba(var(--water-rgb), 0.55), rgba(var(--primary-rgb), 0.2) 60%, transparent);
+}
+
+.hero__glow--b {
+  width: 50vw;
+  height: 40vw;
+  right: -10vw;
+  top: -10vw;
+  background: radial-gradient(closest-side, rgba(var(--primary-rgb), 0.18), transparent);
+}
+
+.hero__particles {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: calc(var(--nav-h) + 2rem) var(--gutter) 22vh;
+  will-change: transform, opacity;
+}
+
+.hero__eyebrow {
+  font-size: clamp(0.95rem, 1.4vw, 1.2rem);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 1rem;
+}
+
+.hero__title {
+  font-size: var(--fs-hero);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  perspective: 800px;
+}
+
+.hero__line {
+  display: block;
+}
+
+.hero__line--1 .char {
+  display: inline-block;
+  will-change: transform;
+}
+
+.hero__sub {
+  max-width: 36ch;
+  margin: 1.6rem auto 0;
+  font-size: var(--fs-lead);
+  font-weight: 500;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.hero__cta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2.2rem;
+}
+
+.hero__badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 2rem;
+}
+
+.hero__landscape {
+  position: absolute;
+  inset: auto 0 0;
+  height: 48vh;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero__landscape .layer {
+  position: absolute;
+  inset: auto -4% 0;
+  width: 108%;
+  height: 100%;
+  max-width: none;
+  will-change: transform;
+}
+
+.layer--far {
+  opacity: 0.9;
+}
+
+.village {
+  fill: #030406;
+}
+
+.village__windows rect {
+  fill: #ffc76a;
+  opacity: 0.7;
+  filter: drop-shadow(0 0 6px rgba(255, 190, 90, 0.9));
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  translate: -50% 0;
+  z-index: 3;
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.scroll-hint__mouse {
+  width: 24px;
+  height: 38px;
+  border: 1.5px solid currentColor;
+  border-radius: 14px;
+  display: grid;
+  justify-items: center;
+  padding-top: 7px;
+}
+
+.scroll-hint__mouse span {
+  width: 3px;
+  height: 7px;
+  border-radius: 3px;
+  background: currentColor;
+  animation: wheel 1.8s var(--ease-out) infinite;
+}
+
+@keyframes wheel {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  80%,
+  100% {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+}
+
+/* ---------- Reinigungs-Szene ---------- */
+
+.clean-scene {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+  perspective: 1400px;
+}
+
+.clean-scene__stage {
+  position: absolute;
+  inset: -20% -25% -25%;
+  transform-origin: 50% 70%;
+  will-change: transform;
+}
+
+.clean-scene__stage canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.clean-scene__vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.75) 22%, rgba(0, 0, 0, 0) 55%),
+    radial-gradient(ellipse at 50% 70%, transparent 40%, rgba(0, 0, 0, 0.7) 100%);
+}
+
+.clean-scene__captions {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: start center;
+  padding-top: calc(var(--nav-h) + 8vh);
+  text-align: center;
+  pointer-events: none;
+}
+
+.caption {
+  grid-area: 1 / 1;
+  max-width: 900px;
+  padding-inline: var(--gutter);
+  visibility: hidden;
+}
+
+.caption h2 {
+  font-size: clamp(2.4rem, 7vw, 6rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  text-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+.caption p {
+  max-width: 30ch;
+  margin: 1.2rem auto 0;
+  font-size: var(--fs-lead);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.clean-scene__meter {
+  position: absolute;
+  right: var(--gutter);
+  bottom: 40px;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 6px 14px;
+  align-items: baseline;
+  padding: 14px 18px;
+  border-radius: 18px;
+  background: rgba(20, 20, 22, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  visibility: hidden;
+}
+
+.clean-scene__meter-label {
+  font-size: 0.75rem;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.clean-scene__meter-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.clean-scene__meter-bar {
+  grid-column: 1 / -1;
+  width: 180px;
+  height: 4px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.clean-scene__meter-bar span {
+  display: block;
+  height: 100%;
+  background: var(--grad-brand);
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+/* ---------- Statement ---------- */
+
+.statement {
+  background: #000;
+  color: #fff;
+  padding: clamp(8rem, 22vh, 14rem) var(--gutter);
+}
+
+.statement__text {
+  max-width: 1000px;
+  margin-inline: auto;
+  font-size: clamp(2rem, 4.6vw, 4rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+}
+
+.statement__text .w {
+  will-change: opacity;
+}

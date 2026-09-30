@@ -1,0 +1,376 @@
+:root {
+  --black: #000;
+  --ink: #1d1d1f;
+  --ink-2: #424245;
+  --gray: #86868b;
+  --gray-light: #d2d2d7;
+  --light: #f5f5f7;
+  --white: #fff;
+  /* Markenfarben aus dem Logo */
+  --primary: #36cc35;
+  --primary-hover: #45da44;
+  --primary-rgb: 54, 204, 53;
+  --primary-ink: #1a8019; /* Grün für Text auf hellem Grund (Kontrast ≥ 4,5:1) */
+  --on-primary: #000;
+  --water: #8cc4ea; /* Wasserspritzer im Logo */
+  --water-rgb: 140, 196, 234;
+  --water-ink: #2a78b5;
+  --terracotta: #d4643a;
+  --tile-dark: #161617;
+  --grad-brand: linear-gradient(90deg, var(--water) 0%, var(--primary) 70%);
+  --grad-insta: linear-gradient(45deg, #f9ce34, #ee2a7b 50%, #6228d7);
+
+  --font: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter Variable', 'Helvetica Neue', Arial, sans-serif;
+  --fs-hero: clamp(3.4rem, 11vw, 10rem);
+  --fs-h2: clamp(2.4rem, 6.2vw, 5.4rem);
+  --fs-h3: clamp(1.5rem, 2.4vw, 2rem);
+  --fs-lead: clamp(1.15rem, 1.6vw, 1.5rem);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --radius: 28px;
+  --gutter: clamp(16px, 5vw, 64px);
+  --nav-h: 52px;
+}
+
+/* Auf hellen Flächen dunklere Varianten, damit Verlaufstexte lesbar bleiben */
+[data-theme='light'] {
+  --grad-brand: linear-gradient(90deg, var(--water-ink) 0%, var(--primary-ink) 70%);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+html.is-loading,
+html.menu-open {
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 17px;
+  line-height: 1.47;
+  letter-spacing: -0.022em;
+  color: var(--ink);
+  background: var(--black);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+img,
+svg,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+p,
+figure,
+blockquote,
+dl,
+dd,
+ol,
+ul {
+  margin: 0;
+}
+
+ol,
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+::selection {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* ---------- Typografie ---------- */
+
+.eyebrow {
+  display: inline-block;
+  font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--gray);
+  margin-bottom: 0.6em;
+}
+
+.eyebrow--accent {
+  background: var(--grad-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.eyebrow--insta {
+  background: var(--grad-insta);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.section-title {
+  font-size: var(--fs-h2);
+  line-height: 1.04;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+
+.section-lead {
+  font-size: var(--fs-lead);
+  line-height: 1.4;
+  font-weight: 500;
+  color: var(--gray);
+  max-width: 34ch;
+  margin-top: 1.2rem;
+}
+
+.section-head {
+  margin-bottom: clamp(2.5rem, 6vw, 5rem);
+}
+
+.section-head--center {
+  text-align: center;
+}
+
+.section-head--center .section-lead {
+  margin-inline: auto;
+}
+
+.gradient-text {
+  background: var(--grad-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-bottom: 0.08em;
+}
+
+.text-muted {
+  color: var(--gray);
+}
+
+.split-line {
+  padding-bottom: 0.06em;
+}
+
+.stars {
+  color: #ffb800;
+  letter-spacing: 0.08em;
+}
+
+.stars--lg {
+  font-size: 1.6rem;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  --bg: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  min-height: 48px;
+  padding: 0.8em 1.6em;
+  border-radius: 999px;
+  background: var(--bg);
+  font-size: 1.0625rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  transition:
+    background-color 0.3s,
+    color 0.3s,
+    box-shadow 0.4s var(--ease-out);
+}
+
+.btn--primary {
+  --bg: var(--primary);
+  color: var(--on-primary);
+  font-weight: 600;
+}
+
+.btn--primary:hover {
+  --bg: var(--primary-hover);
+  box-shadow: 0 10px 40px -10px rgba(var(--primary-rgb), 0.8);
+}
+
+.btn--light {
+  --bg: #fff;
+  color: var(--ink);
+}
+
+.btn--light:hover {
+  box-shadow: 0 12px 40px -10px rgba(255, 255, 255, 0.6);
+}
+
+.btn--link {
+  padding-inline: 0;
+  min-height: auto;
+  color: var(--primary-ink);
+}
+
+[data-theme='dark'] .btn--link {
+  color: var(--primary);
+}
+
+.btn--link:hover {
+  text-decoration: underline;
+}
+
+.btn--lg {
+  font-size: 1.2rem;
+  padding: 1em 2em;
+}
+
+.btn--small {
+  min-height: 38px;
+  font-size: 0.9rem;
+  padding: 0.5em 1.2em;
+}
+
+.btn--insta {
+  color: #fff;
+  background: var(--grad-insta);
+  background-size: 200% 200%;
+  animation: instaShift 6s ease infinite;
+}
+
+.btn--insta svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+.btn--insta:hover {
+  box-shadow: 0 14px 44px -10px rgba(238, 42, 123, 0.7);
+}
+
+@keyframes instaShift {
+  50% {
+    background-position: 100% 100%;
+  }
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.45em 1em;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.live-status::before,
+.badge[data-open-status]::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 0.5em;
+  vertical-align: 0.1em;
+  background: var(--gray);
+}
+
+.is-open.live-status::before,
+.is-open.badge::before {
+  background: var(--primary);
+  box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0.6);
+  animation: pulse 2s infinite;
+}
+
+.is-closed.live-status::before,
+.is-closed.badge::before {
+  background: #ff9f0a;
+}
+
+@keyframes pulse {
+  70% {
+    box-shadow: 0 0 0 10px rgba(var(--primary-rgb), 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* SplitText verpackt Wörter in transformierte Elemente – background-clip muss dort neu gesetzt werden */
+[data-split] .gradient-text * {
+  background-image: var(--grad-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Logo (rund, weißer Hintergrund – funktioniert auf hellen und dunklen Flächen) */
+.logo-badge {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.logo-badge--lg {
+  width: 48px;
+  height: 48px;
+}
