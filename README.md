@@ -1,7 +1,6 @@
 # RS Dach- und Fassadenreinigung – Website
 
-Seriöser One-Pager im Apple-Stil mit Scroll-Animationen, Parallax und prozedural gerenderten Grafiken
-(keine Stockfotos nötig). Farben nach Logo: Primärgrün `#36cc35`, Anthrazit, Wasserblau. Gebaut mit **Vite**, **GSAP** (ScrollTrigger, SplitText) und **Lenis**.
+Seriöser One-Pager im Apple-Stil mit Scroll-Animationen, Parallax und echter Fotografie. Farben nach Logo: Primärgrün `#36cc35`, Anthrazit, Wasserblau. Gebaut mit **Vite**, **GSAP** (ScrollTrigger, SplitText) und **Lenis**.
 
 ## Start
 
@@ -22,10 +21,10 @@ impressum.html          Vorlage – gelb markierte Platzhalter ausfüllen!
 datenschutz.html        Vorlage – Hosting-Anbieter ergänzen, rechtlich prüfen
 src/data/company.js     Firmendaten: Telefon, Öffnungszeiten, Instagram, Adresse
 src/js/
-  textures.js           Prozedurale Dach-, Fassaden- und Solar-Texturen (vorher/nachher)
+  photo.js              Fotos laden + realistischen Vorher-Zustand erzeugen (Moos, Algen, Staub per Rauschen)
   clean-scene.js        Gepinnte Szene: Hochdrucklanze reinigt das Dach beim Scrollen
   hero.js               Intro, Dachfläche als Hintergrund, Parallax, Kennzahlen-Leiste
-  static-textures.js    Statische Texturen für <canvas data-texture="…">
+  band.js               Bildband, das sich beim Scrollen zum Vollbild öffnet
   services.js           Horizontal scrollende Leistungskarten mit Wisch-Reinigung
   pressure.js           „250 bar“-Zoom mit Druckring + Manometer
   compare.js            Vorher/Nachher-Slider (Dach / Fassade / Solar)
@@ -42,8 +41,10 @@ src/styles/             base, chrome (Nav/Footer/Cursor), hero, sections
 - **Farben & Typografie:** Variablen oben in `src/styles/base.css`
 - **Einzelne Instagram-Beiträge einbetten:** Beitrags-URLs in `company.instagram.posts` eintragen.
   Sie werden nach dem Klick auf „Live-Feed laden“ unter dem iPhone angezeigt.
-- **Echte Fotos:** Die Vorher/Nachher-Grafiken sind Illustrationen. Für echte Bilder in `compare.js`
-  statt `renderTexture(...)` einfach zwei `Image`-Objekte auf die Canvas zeichnen.
+- **Fotos:** Alle Bilder liegen in `public/images/` (Symbolbilder von Unsplash, Nachweise in
+  `public/images/CREDITS.md`). Eigene Projektfotos einfach unter gleichem Dateinamen ablegen –
+  der „Vorher“-Zustand für Reinigungs-Szene, Leistungskarten und Slider wird automatisch daraus erzeugt.
+  Wer echte Vorher/Nachher-Paare hat, kann in `compare.js` statt `grime(...)` das echte Vorher-Foto laden.
 
 ## Datenschutz
 

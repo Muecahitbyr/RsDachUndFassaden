@@ -1,6 +1,5 @@
 import { gsap } from 'gsap';
 import { company } from '../data/company.js';
-import { renderTexture } from './textures.js';
 
 // Instagram: stilisierte Profil-Vorschau im iPhone. Das echte Profil wird erst
 // nach Klick geladen (2-Klick-Lösung, DSGVO-freundlich).
@@ -14,18 +13,13 @@ export function initInstagram() {
   const loadBtn = section.querySelector('[data-ig-load]');
   const postsWrap = section.querySelector('[data-ig-posts]');
 
-  // Vorschau-Kacheln aus den prozeduralen Texturen
-  const kinds = ['roof', 'facade', 'solar', 'roof', 'solar', 'facade', 'roof', 'facade', 'roof'];
-  kinds.forEach((kind, i) => {
-    const a = document.createElement('a');
-    a.href = company.instagram.url;
-    a.target = '_blank';
-    a.rel = 'noopener';
-    a.className = 'ig__tile';
-    a.setAttribute('aria-label', 'Beitrag auf Instagram ansehen');
-    const c = renderTexture(kind, 220, 220, i % 4 === 1, 30 + i);
-    a.appendChild(c);
-    grid.appendChild(a);
+  // Platzhalter-Kacheln (bewusst unscharf – der echte Feed lädt erst nach Einwilligung)
+  const thumbs = ['roof-red', 'facade-yellow', 'solar-house', 'roof-dormers', 'roof-ridge', 'house-brick', 'roof-tiles', 'house-ivy', 'solar-field'];
+  thumbs.forEach((name) => {
+    const tile = document.createElement('span');
+    tile.className = 'ig__tile';
+    tile.innerHTML = `<img src="/images/thumbs/${name}.webp" alt="" loading="lazy" width="360" height="360" />`;
+    grid.appendChild(tile);
   });
 
   gsap.from(grid.children, {

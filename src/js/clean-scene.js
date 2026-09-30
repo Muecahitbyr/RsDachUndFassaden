@@ -1,9 +1,11 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { createCanvas, renderRoof } from './textures.js';
+import { coverCanvas, createCanvas, grime, loadImage } from './photo.js';
+
+const PHOTO = '/images/roof-red.webp';
 
 // Gepinnte Szene: Beim Scrollen fährt eine Hochdrucklanze Bahn für Bahn über das
-// verschmutzte Dach und legt die sauberen Ziegel frei.
+// verschmutzte Dach und legt das saubere Foto frei.
 export function initCleanScene() {
   const section = document.querySelector('.clean-scene');
   if (!section) return;
@@ -29,19 +31,20 @@ export function initCleanScene() {
   let lastP = -1;
   let time = 0;
 
-  function build() {
-    dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+  async function build() {
+    // Die Bühne ist größer als der Viewport – 1:1 reicht für ein scharfes Bild
+    dpr = Math.min(window.devicePixelRatio || 1, 1.25);
     // offsetWidth statt getBoundingClientRect: die Bühne ist 3D-transformiert
-    W = Math.round(canvas.offsetWidth * dpr);
-    H = Math.round(canvas.offsetHeight * dpr);
-    if (!W || !H) return;
+    const w = Math.round(canvas.offsetWidth * dpr);
+    const h = Math.round(canvas.offsetHeight * dpr);
+    if (!w || !h) return;
+    const img = await loadImage(PHOTO);
+    W = w;
+    H = h;
     canvas.width = W;
     canvas.height = H;
-    const tileW = Math.max(40, Math.min(110, W / 16));
-    dirtyC = createCanvas(W, H);
-    renderRoof(dirtyC.getContext('2d'), W, H, { dirty: true, seed: 21, tileW });
-    cleanC = createCanvas(W, H);
-    renderRoof(cleanC.getContext('2d'), W, H, { dirty: false, seed: 21, tileW });
+    cleanC = coverCanvas(img, W, H, 0.5, 0.4);
+    dirtyC = grime(cleanC, 'roof', 21);
     compC = createCanvas(W, H);
     compCtx = compC.getContext('2d');
     lastP = -1;

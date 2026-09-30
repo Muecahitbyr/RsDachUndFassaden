@@ -20,9 +20,12 @@
   will-change: transform;
 }
 
-.hero__canvas {
+.hero__img {
   width: 100%;
   height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: 50% 40%;
 }
 
 .hero__shade {
@@ -164,7 +167,7 @@
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(14, 15, 15, 0.9) 0%, rgba(14, 15, 15, 0.55) 35%, rgba(14, 15, 15, 0) 65%),
+    linear-gradient(90deg, rgba(14, 15, 15, 0.94) 0%, rgba(14, 15, 15, 0.8) 30%, rgba(14, 15, 15, 0.35) 55%, rgba(14, 15, 15, 0.1) 75%),
     linear-gradient(180deg, var(--char) 0%, rgba(14, 15, 15, 0) 25%, rgba(14, 15, 15, 0) 80%, rgba(14, 15, 15, 0.7) 100%);
 }
 
@@ -272,4 +275,57 @@
 
 .statement__text .w {
   will-change: opacity;
+}
+
+/* ---------- Bildband ---------- */
+
+.band {
+  background: var(--char);
+}
+
+.band__frame {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  clip-path: inset(0 0 round 0);
+  will-change: clip-path;
+}
+
+.band__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  will-change: transform;
+}
+
+.band__shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(14, 15, 15, 0) 40%, rgba(14, 15, 15, 0.85) 100%),
+    linear-gradient(90deg, rgba(14, 15, 15, 0.45) 0%, rgba(14, 15, 15, 0) 60%);
+}
+
+.band__caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: clamp(2.5rem, 9vh, 6rem);
+  color: #fff;
+}
+
+.band__caption .eyebrow {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.band__quote {
+  max-width: 24ch;
+  font-size: clamp(1.8rem, 3.6vw, 3.1rem);
+  font-weight: 600;
+  line-height: 1.14;
+  letter-spacing: -0.028em;
 }

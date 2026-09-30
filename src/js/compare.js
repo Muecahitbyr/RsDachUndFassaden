@@ -1,6 +1,13 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { renderTexture } from './textures.js';
+import { coverCanvas, grime, loadImage } from './photo.js';
+
+// Foto, Verschmutzungsprofil und Bildausschnitt je Tab
+const SCENES = {
+  roof: { src: '/images/roof-red.webp', kind: 'roof', seed: 12, fx: 0.5, fy: 0.3 },
+  facade: { src: '/images/facade-yellow.webp', kind: 'facade', seed: 4, fx: 0.5, fy: 0.35 },
+  solar: { src: '/images/solar-field.webp', kind: 'solar', seed: 9, fx: 0.5, fy: 0.6 },
+};
 
 // Vorher/Nachher-Slider mit Tabs (Dach, Fassade, Solar).
 export function initCompare() {
@@ -12,7 +19,6 @@ export function initCompare() {
   const range = stage.querySelector('.compare__range');
   const tabs = [...section.querySelectorAll('[role="tab"]')];
   const indicator = section.querySelector('.compare__tabs-indicator');
-  const seeds = { roof: 12, facade: 4, solar: 9 };
   const cache = new Map();
   let kind = 'roof';
 
@@ -21,17 +27,17 @@ export function initCompare() {
     range.value = v;
   };
 
-  function render() {
+  async function render() {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const w = Math.round(stage.offsetWidth * dpr);
     const h = Math.round(stage.offsetHeight * dpr);
     if (!w || !h) return;
     const key = `${kind}-${w}x${h}`;
     if (!cache.has(key)) {
-      cache.set(key, {
-        dirty: renderTexture(kind, w, h, true, seeds[kind]),
-        clean: renderTexture(kind, w, h, false, seeds[kind]),
-      });
+      const sc = SCENES[kind];
+      const img = await loadImage(sc.src);
+      const clean = coverCanvas(img, w, h, sc.fx, sc.fy);
+      cache.set(key, { clean, dirty: grime(clean, sc.kind, sc.seed) });
     }
     const t = cache.get(key);
     [
@@ -50,23 +56,25 @@ export function initCompare() {
   }
 
   tabs.forEach((tab) => {
-    tab.addEventListener('click', () => {
+    tab.addEventListener('click', async () => {
       if (tab.dataset.kind === kind) return;
       tabs.forEach((t) => t.setAttribute('aria-selected', String(t === tab)));
       moveIndicator(tab);
       kind = tab.dataset.kind;
+      await gsap.to([before, after], { opacity: 0, duration: 0.3, ease: 'power2.in' });
+      await render();
+      const obj = { v: 85 };
       gsap
         .timeline()
-        .to([before, after], { opacity: 0, scale: 1.04, filter: 'blur(8px)', duration: 0.35, ease: 'power2.in' })
-        .add(render)
-        .to([before, after], { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.7, ease: 'power3.out' })
-        .fromTo(range, { value: 85 }, { value: 50, duration: 1, ease: 'expo.out', onUpdate: () => setPos(Number(range.value)) }, '<');
+        .to([before, after], { opacity: 1, duration: 0.6, ease: 'power2.out' })
+        .to(obj, { v: 50, duration: 1.1, ease: 'expo.out', onUpdate: () => setPos(obj.v) }, '<');
     });
   });
 
   range.addEventListener('input', () => setPos(Number(range.value)));
   setPos(50);
   render();
+  Object.values(SCENES).forEach((sc) => loadImage(sc.src)); // Tabs vorladen
   requestAnimationFrame(() => moveIndicator(tabs[0]));
 
   // Teaser: Regler schwingt einmal hin und her, wenn der Slider ins Bild kommt

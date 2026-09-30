@@ -17,6 +17,7 @@
     <link rel="icon" href="/logo.jpg" type="image/jpeg" />
     <link rel="apple-touch-icon" href="/logo.jpg" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preload" as="image" href="/images/hero-roof.webp" fetchpriority="high" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -93,7 +94,7 @@
     <main>
       <!-- HERO -->
       <section class="hero" id="top" data-theme="dark">
-        <div class="hero__media" aria-hidden="true"><canvas class="hero__canvas"></canvas></div>
+        <div class="hero__media" aria-hidden="true"><img class="hero__img" src="/images/hero-roof.webp" alt="" width="2400" height="1800" fetchpriority="high" /></div>
         <div class="hero__shade" aria-hidden="true"></div>
 
         <div class="container hero__inner">
@@ -160,6 +161,18 @@
         </div>
       </section>
 
+      <!-- BILDBAND -->
+      <section class="band" data-theme="dark">
+        <div class="band__frame">
+          <img class="band__img" src="/images/roof-dormers.webp" alt="Gepflegtes Ziegeldach mit Gauben" width="2400" height="1591" loading="lazy" />
+          <div class="band__shade" aria-hidden="true"></div>
+          <div class="container band__caption">
+            <span class="eyebrow">Werterhalt</span>
+            <p class="band__quote">Ein gepflegtes Dach prägt den ersten Eindruck – und schützt, was darunter liegt.</p>
+          </div>
+        </div>
+      </section>
+
       <!-- SERVICES (horizontal) -->
       <section class="services" id="leistungen" data-theme="light">
         <div class="services__pin">
@@ -174,7 +187,7 @@
             <div class="services__track">
               <article class="service-card">
                 <div class="service-card__visual">
-                  <canvas data-wipe="roof" data-seed="3" aria-hidden="true"></canvas>
+                  <canvas data-wipe="roof" data-img="/images/roof-tiles.webp" data-seed="3" aria-hidden="true"></canvas>
                 </div>
                 <div class="service-card__body">
                   <span class="service-card__num">01</span>
@@ -184,7 +197,7 @@
               </article>
               <article class="service-card">
                 <div class="service-card__visual">
-                  <canvas data-wipe="facade" data-seed="8" aria-hidden="true"></canvas>
+                  <canvas data-wipe="facade" data-img="/images/facade-yellow.webp" data-seed="8" aria-hidden="true"></canvas>
                 </div>
                 <div class="service-card__body">
                   <span class="service-card__num">02</span>
@@ -194,7 +207,7 @@
               </article>
               <article class="service-card">
                 <div class="service-card__visual">
-                  <canvas data-wipe="solar" data-seed="5" aria-hidden="true"></canvas>
+                  <canvas data-wipe="solar" data-img="/images/solar-house.webp" data-seed="5" aria-hidden="true"></canvas>
                 </div>
                 <div class="service-card__body">
                   <span class="service-card__num">03</span>
@@ -204,7 +217,7 @@
               </article>
               <article class="service-card">
                 <div class="service-card__visual">
-                  <canvas data-texture="roof" data-seed="14" aria-hidden="true"></canvas>
+                  <img src="/images/roof-moss.webp" alt="Verwitterte Dachziegel mit Moos" width="1600" height="1200" loading="lazy" />
                   <div class="fog" aria-hidden="true"><span></span><span></span></div>
                 </div>
                 <div class="service-card__body">
@@ -215,7 +228,7 @@
               </article>
               <article class="service-card">
                 <div class="service-card__visual">
-                  <canvas data-texture="roof" data-seed="27" aria-hidden="true"></canvas>
+                  <img src="/images/roof-ridge.webp" alt="Dachfirst mit Ziegeln" width="1600" height="1066" loading="lazy" />
                   <div class="inspect" aria-hidden="true">
                     <span class="inspect__frame"><i></i><i></i><i></i><i></i></span>
                     <span class="inspect__label">Ziegel-Check</span>
@@ -271,7 +284,7 @@
           </header>
           <div class="bento">
             <article class="tile tile--steam tile--wide" data-reveal>
-              <canvas class="tile__bg" data-texture="roof" data-seed="41" aria-hidden="true"></canvas>
+              <img class="tile__bg" src="/images/roof-weathered.webp" alt="" width="1800" height="1350" loading="lazy" />
               <div class="fog" aria-hidden="true"><span></span><span></span></div>
               <div class="tile__content">
                 <span class="eyebrow">Heißdampf</span>
@@ -362,7 +375,7 @@
             </div>
             <input class="compare__range" type="range" min="0" max="100" value="50" aria-label="Vorher/Nachher-Vergleich verschieben" />
           </div>
-          <p class="compare__note">Illustration zur Veranschaulichung. Echte Projekte zeigen wir auf Instagram.</p>
+          <p class="compare__note">Symbolbilder – der Vorher-Zustand ist digital visualisiert. Echte Projekte zeigen wir auf Instagram.</p>
         </div>
       </section>
 
@@ -536,6 +549,7 @@
 
       <!-- CONTACT -->
       <section class="contact" id="kontakt" data-theme="dark">
+        <div class="contact__bg" aria-hidden="true"><img src="/images/town.webp" alt="" width="2200" height="1650" loading="lazy" /></div>
         <div class="container">
           <div class="contact__grid">
             <div class="contact__main">
@@ -585,7 +599,7 @@
           </nav>
         </div>
         <div class="footer__bottom">
-          <p>© <span data-year></span> RS Dach- und Fassadenreinigung · Blütenring 21 · 87665 Mauerstetten · 01515 0881008</p>
+          <p>© <span data-year></span> RS Dach- und Fassadenreinigung · Blütenring 21 · 87665 Mauerstetten · 01515 0881008<br />Symbolbilder: Unsplash</p>
           <nav aria-label="Rechtliches"><a href="/impressum.html">Impressum</a><a href="/datenschutz.html">Datenschutz</a></nav>
         </div>
       </div>

@@ -9,6 +9,7 @@ import { initSmoothScroll } from './js/smooth-scroll.js';
 import { runPreloader } from './js/preloader.js';
 import { initHero } from './js/hero.js';
 import { initCleanScene } from './js/clean-scene.js';
+import { initBand } from './js/band.js';
 import { initReveals } from './js/reveal.js';
 import { initServices } from './js/services.js';
 import { initPressure } from './js/pressure.js';
@@ -18,7 +19,6 @@ import { initReviews } from './js/reviews.js';
 import { initInstagram } from './js/instagram.js';
 import { initHours } from './js/hours.js';
 import { initNav } from './js/nav.js';
-import { initStaticTextures } from './js/static-textures.js';
 import { initMagnetic } from './js/magnetic.js';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -36,11 +36,11 @@ async function boot() {
 
   initSmoothScroll({ reduced });
   initHours();
-  initStaticTextures();
 
   // ScrollTrigger-Reihenfolge = Reihenfolge auf der Seite (wichtig für Pins)
   const hero = initHero({ reduced });
   initCleanScene();
+  initBand();
   initServices();
   initPressure();
   initCompare();

@@ -1,6 +1,6 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { renderTexture } from './textures.js';
+import { coverCanvas, grime, loadImage } from './photo.js';
 
 // Mini-Vorher/Nachher auf den Leistungskarten: die Reinigung "wischt" über das Bild.
 class Wipe {
@@ -8,20 +8,22 @@ class Wipe {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
     this.kind = canvas.dataset.wipe;
+    this.src = canvas.dataset.img;
     this.seed = Number(canvas.dataset.seed || 1);
     this.p = 0;
     this.build();
   }
 
-  build() {
+  async build() {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const w = Math.round(this.canvas.offsetWidth * dpr);
     const h = Math.round(this.canvas.offsetHeight * dpr);
     if (!w || !h || w === this.canvas.width) return this.draw();
+    const img = await loadImage(this.src);
     this.canvas.width = w;
     this.canvas.height = h;
-    this.dirty = renderTexture(this.kind, w, h, true, this.seed);
-    this.clean = renderTexture(this.kind, w, h, false, this.seed);
+    this.clean = coverCanvas(img, w, h);
+    this.dirty = grime(this.clean, this.kind, this.seed);
     this.draw();
   }
 
@@ -51,12 +53,12 @@ class Wipe {
     if (p > 0 && p < 1) {
       const g = ctx.createLinearGradient(x - h * 0.12, 0, x + h * 0.12, 0);
       g.addColorStop(0, 'rgba(160,220,255,0)');
-      g.addColorStop(0.5, 'rgba(210,240,255,.65)');
+      g.addColorStop(0.5, 'rgba(230,245,255,.35)');
       g.addColorStop(1, 'rgba(160,220,255,0)');
       ctx.save();
       ctx.globalCompositeOperation = 'lighter';
       ctx.strokeStyle = g;
-      ctx.lineWidth = h * 0.05;
+      ctx.lineWidth = h * 0.03;
       ctx.beginPath();
       ctx.moveTo(x + h * 0.2, 0);
       ctx.lineTo(x - h * 0.2, h);
