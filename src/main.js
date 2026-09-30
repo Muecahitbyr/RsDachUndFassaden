@@ -18,7 +18,7 @@ import { initReviews } from './js/reviews.js';
 import { initInstagram } from './js/instagram.js';
 import { initHours } from './js/hours.js';
 import { initNav } from './js/nav.js';
-import { initCursor } from './js/cursor.js';
+import { initStaticTextures } from './js/static-textures.js';
 import { initMagnetic } from './js/magnetic.js';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -36,6 +36,7 @@ async function boot() {
 
   initSmoothScroll({ reduced });
   initHours();
+  initStaticTextures();
 
   // ScrollTrigger-Reihenfolge = Reihenfolge auf der Seite (wichtig für Pins)
   const hero = initHero({ reduced });
@@ -48,7 +49,6 @@ async function boot() {
   initInstagram();
   initReveals();
   initNav();
-  initCursor({ reduced });
   initMagnetic({ reduced });
 
   ScrollTrigger.sort();

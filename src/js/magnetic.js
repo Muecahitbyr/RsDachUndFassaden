@@ -5,12 +5,12 @@ export function initMagnetic({ reduced }) {
   if (reduced || !matchMedia('(pointer: fine)').matches) return;
 
   document.querySelectorAll('.magnetic').forEach((el) => {
-    const x = gsap.quickTo(el, 'x', { duration: 0.6, ease: 'elastic.out(1, 0.4)' });
-    const y = gsap.quickTo(el, 'y', { duration: 0.6, ease: 'elastic.out(1, 0.4)' });
+    const x = gsap.quickTo(el, 'x', { duration: 0.8, ease: 'power3' });
+    const y = gsap.quickTo(el, 'y', { duration: 0.8, ease: 'power3' });
     el.addEventListener('pointermove', (e) => {
       const r = el.getBoundingClientRect();
-      x((e.clientX - (r.left + r.width / 2)) * 0.35);
-      y((e.clientY - (r.top + r.height / 2)) * 0.35);
+      x((e.clientX - (r.left + r.width / 2)) * 0.12);
+      y((e.clientY - (r.top + r.height / 2)) * 0.12);
     });
     el.addEventListener('pointerleave', () => {
       x(0);
@@ -26,8 +26,8 @@ export function initMagnetic({ reduced }) {
       const r = el.getBoundingClientRect();
       const nx = (e.clientX - r.left) / r.width;
       const ny = (e.clientY - r.top) / r.height;
-      ry((nx - 0.5) * 14);
-      rx(-(ny - 0.5) * 14);
+      ry((nx - 0.5) * 5);
+      rx(-(ny - 0.5) * 5);
       el.style.setProperty('--mx', `${nx * 100}%`);
       el.style.setProperty('--my', `${ny * 100}%`);
     });

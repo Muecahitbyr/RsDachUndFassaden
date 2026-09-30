@@ -25,40 +25,31 @@ export function initInstagram() {
     a.setAttribute('aria-label', 'Beitrag auf Instagram ansehen');
     const c = renderTexture(kind, 220, 220, i % 4 === 1, 30 + i);
     a.appendChild(c);
-    if (i % 3 === 0) a.insertAdjacentHTML('beforeend', '<span class="ig__tag">Vorher → Nachher</span>');
     grid.appendChild(a);
   });
 
   gsap.from(grid.children, {
-    scale: 0.6,
     opacity: 0,
-    duration: 0.9,
-    ease: 'back.out(1.6)',
-    stagger: { each: 0.06, grid: [3, 3], from: 'center' },
+    y: 12,
+    duration: 0.8,
+    ease: 'power3.out',
+    stagger: { each: 0.05, grid: [3, 3], from: 'start' },
     scrollTrigger: { trigger: '.phone', start: 'top 70%' },
   });
 
   // Telefon dreht sich beim Scrollen in die Frontansicht
   gsap.fromTo(
     '.phone',
-    { rotationY: -32, rotationX: 14, rotationZ: -6, y: 120 },
+    { rotationY: -14, rotationX: 6, y: 80 },
     {
       rotationY: 0,
       rotationX: 0,
-      rotationZ: 0,
-      y: -40,
+      y: 0,
       ease: 'none',
       transformPerspective: 1400,
       scrollTrigger: { trigger: section, start: 'top bottom', end: 'center center', scrub: 1 },
     },
   );
-  gsap.to('.insta__blobs span', {
-    yPercent: (i) => [-40, 30, -60][i],
-    xPercent: (i) => [20, -30, 10][i],
-    ease: 'none',
-    scrollTrigger: { trigger: section, start: 'top bottom', end: 'bottom top', scrub: true },
-  });
-
   loadBtn.addEventListener('click', () => {
     const iframe = document.createElement('iframe');
     iframe.src = `https://www.instagram.com/${company.instagram.handle}/embed`;

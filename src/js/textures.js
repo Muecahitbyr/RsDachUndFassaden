@@ -52,18 +52,19 @@ function moss(ctx, rnd, cx, cy, size) {
     const x = cx + (rnd() - 0.5) * size * 2.2;
     const y = cy + (rnd() - 0.6) * size * 0.9;
     const r = size * (0.25 + rnd() * 0.45);
-    blob(ctx, x, y, r, `hsl(${78 + rnd() * 24} ${32 + rnd() * 22}% ${15 + rnd() * 14}%)`);
+    blob(ctx, x, y, r, `hsl(${70 + rnd() * 22} ${22 + rnd() * 16}% ${14 + rnd() * 11}%)`);
   }
   for (let i = 0; i < n; i++) {
     const x = cx + (rnd() - 0.5) * size * 2;
     const y = cy + (rnd() - 0.7) * size * 0.8;
-    blob(ctx, x, y, size * (0.08 + rnd() * 0.16), `hsla(${80 + rnd() * 20} 55% ${34 + rnd() * 14}% / .9)`);
+    blob(ctx, x, y, size * (0.08 + rnd() * 0.16), `hsla(${75 + rnd() * 20} 32% ${28 + rnd() * 10}% / .8)`);
   }
 }
 
 export function renderRoof(ctx, w, h, { dirty = false, seed = 7, tileW } = {}) {
   const geo = mulberry32(seed);
   const dirt = mulberry32(seed * 977 + 13);
+  const grain = mulberry32(seed * 53 + 1);
   const tw = tileW ?? Math.max(18, Math.min(120, w / 20));
   const rowH = tw * 0.6;
   const len = tw * 1.9;
@@ -78,9 +79,9 @@ export function renderRoof(ctx, w, h, { dirty = false, seed = 7, tileW } = {}) {
     const yb = r * rowH;
     const off = (r % 2) * (tw / 2) + tw / 2;
     for (let c = 0; c < cols; c++) {
-      const hue = 10 + geo() * 10;
-      const sat = 52 + geo() * 16;
-      const lig = 34 + geo() * 12;
+      const hue = 11 + geo() * 9;
+      const sat = 38 + geo() * 14;
+      const lig = 31 + geo() * 12;
       const x = c * tw - off + (geo() - 0.5) * tw * 0.03;
       const y = yb + (geo() - 0.5) * tw * 0.04;
 
@@ -102,20 +103,18 @@ export function renderRoof(ctx, w, h, { dirty = false, seed = 7, tileW } = {}) {
       ctx.restore();
 
       if (!dirty) {
-        // Glanzkante + nasser Schimmer
-        ctx.strokeStyle = `hsla(${hue} 90% 78% / .22)`;
-        ctx.lineWidth = Math.max(1, tw * 0.025);
+        // Feine Kante + Tonkörnung statt Plastikglanz
+        ctx.strokeStyle = `hsla(${hue} 60% 70% / .12)`;
+        ctx.lineWidth = Math.max(1, tw * 0.02);
         ctx.beginPath();
         ctx.moveTo(x + tw * 0.08, y - tw * 0.3);
         ctx.quadraticCurveTo(x + tw * 0.08, y - tw * 0.04, x + tw / 2, y - tw * 0.04);
         ctx.stroke();
-        ctx.save();
-        ctx.globalAlpha = 0.12;
-        ctx.fillStyle = '#fff';
-        ctx.beginPath();
-        ctx.ellipse(x + tw * 0.5, y - rowH * 0.45, tw * 0.28, rowH * 0.12, 0, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
+        const specks = 6 + Math.floor(grain() * 8);
+        for (let i = 0; i < specks; i++) {
+          ctx.fillStyle = grain() > 0.5 ? 'rgba(0,0,0,.14)' : 'rgba(255,220,200,.08)';
+          ctx.fillRect(x + tw * (0.1 + grain() * 0.8), y - rowH * (0.1 + grain() * 0.85), tw * 0.03, tw * 0.03);
+        }
       } else {
         // Schwärzung, Flechten und Moospolster an der Unterkante
         if (dirt() < 0.7) {
@@ -132,8 +131,8 @@ export function renderRoof(ctx, w, h, { dirty = false, seed = 7, tileW } = {}) {
             ctx,
             x + tw * (0.15 + dirt() * 0.7),
             y - rowH * (0.15 + dirt() * 0.8),
-            tw * (0.03 + dirt() * 0.06),
-            `hsla(${55 + dirt() * 30} 18% ${58 + dirt() * 22}% / ${0.35 + dirt() * 0.45})`,
+            tw * (0.02 + dirt() * 0.045),
+            `hsla(${55 + dirt() * 30} 12% ${52 + dirt() * 18}% / ${0.2 + dirt() * 0.3})`,
           );
         }
         if (dirt() < 0.62) moss(ctx, dirt, x + tw * (0.25 + dirt() * 0.5), y - tw * 0.05, tw * (0.12 + dirt() * 0.14));
@@ -152,8 +151,8 @@ export function renderRoof(ctx, w, h, { dirty = false, seed = 7, tileW } = {}) {
   } else {
     const g = ctx.createLinearGradient(0, 0, w, h);
     g.addColorStop(0, 'rgba(255,255,255,0)');
-    g.addColorStop(0.45, 'rgba(255,240,230,.07)');
-    g.addColorStop(0.55, 'rgba(255,240,230,.1)');
+    g.addColorStop(0.45, 'rgba(255,240,230,.04)');
+    g.addColorStop(0.55, 'rgba(255,240,230,.06)');
     g.addColorStop(1, 'rgba(255,255,255,0)');
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, w, h);

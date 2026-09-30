@@ -34,13 +34,13 @@ export function initPressure() {
     defaults: { ease: 'none' },
     scrollTrigger: { trigger: pin, start: 'top top', end: '+=220%', pin: true, scrub: 1 },
   });
-  tl.fromTo('.pressure__number', { scale: 7, opacity: 0, filter: 'blur(30px)' }, { scale: 1, opacity: 1, filter: 'blur(0px)', duration: 3, ease: 'power2.out' }, 0)
-    .fromTo('.pressure__ring', { scale: 0.5, rotation: -220, opacity: 0 }, { scale: 1, rotation: -90, opacity: 1, duration: 4, ease: 'power2.out' }, 0.5)
+  tl.fromTo('.pressure__number', { scale: 2.6, opacity: 0, filter: 'blur(12px)' }, { scale: 1, opacity: 1, filter: 'blur(0px)', duration: 3, ease: 'power2.out' }, 0)
+    .fromTo('.pressure__ring', { scale: 0.8, rotation: -150, opacity: 0 }, { scale: 1, rotation: -90, opacity: 1, duration: 4, ease: 'power2.out' }, 0.5)
     .to(arc, { strokeDashoffset: 0, duration: 4 }, 1.5)
     .to(counter, { v: 250, duration: 4, onUpdate: () => (value.textContent = Math.round(counter.v)) }, 1.5)
     .fromTo(tickEls, { opacity: 0.08 }, { opacity: 1, stagger: 4 / tickEls.length, duration: 0.2 }, 1.5)
     .from(['.pressure__center .eyebrow', '.pressure__caption'], { opacity: 0, y: 20, duration: 1, stagger: 0.3 }, 3.2)
-    .from('.pressure__facts li', { opacity: 0, y: 60, filter: 'blur(10px)', duration: 1.2, stagger: 0.4 }, 5)
+    .from('.pressure__facts li', { opacity: 0, y: 30, duration: 1.2, stagger: 0.3 }, 5)
     .to({}, { duration: 1 });
 
   // Bento: Manometer-Nadel und Autark-Tank
@@ -48,7 +48,7 @@ export function initPressure() {
   gsap.to('.gauge__needle', {
     rotation: 70,
     duration: 2.2,
-    ease: 'elastic.out(1, 0.35)',
+    ease: 'power3.out',
     scrollTrigger: { trigger: '.tile--gauge', start: 'top 80%' },
   });
   gsap.fromTo('.gauge__fill', { strokeDasharray: 252, strokeDashoffset: 252 }, {

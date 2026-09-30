@@ -1,7 +1,7 @@
 # RS Dach- und Fassadenreinigung – Website
 
-One-Pager im Apple-Stil mit Scroll-Animationen, Parallax und prozedural gerenderten Grafiken
-(keine Stockfotos nötig). Gebaut mit **Vite**, **GSAP** (ScrollTrigger, SplitText) und **Lenis**.
+Seriöser One-Pager im Apple-Stil mit Scroll-Animationen, Parallax und prozedural gerenderten Grafiken
+(keine Stockfotos nötig). Farben nach Logo: Primärgrün `#36cc35`, Anthrazit, Wasserblau. Gebaut mit **Vite**, **GSAP** (ScrollTrigger, SplitText) und **Lenis**.
 
 ## Start
 
@@ -24,20 +24,22 @@ src/data/company.js     Firmendaten: Telefon, Öffnungszeiten, Instagram, Adress
 src/js/
   textures.js           Prozedurale Dach-, Fassaden- und Solar-Texturen (vorher/nachher)
   clean-scene.js        Gepinnte Szene: Hochdrucklanze reinigt das Dach beim Scrollen
-  hero.js               Intro, Allgäu-Dorf-Silhouette, Parallax, Wassertropfen-Partikel
+  hero.js               Intro, Dachfläche als Hintergrund, Parallax, Kennzahlen-Leiste
+  static-textures.js    Statische Texturen für <canvas data-texture="…">
   services.js           Horizontal scrollende Leistungskarten mit Wisch-Reinigung
   pressure.js           „250 bar“-Zoom mit Druckring + Manometer
   compare.js            Vorher/Nachher-Slider (Dach / Fassade / Solar)
-  reviews.js            Google-Bewertungen, Sterne, geschwindigkeitsabhängiges Laufband
+  reviews.js            Google-Bewertungen
   instagram.js          iPhone-Mockup, 2-Klick-Einbindung des Instagram-Profils
   hours.js              Live-Status „Jetzt geöffnet“ (Zeitzone Europe/Berlin)
-  nav.js, cursor.js, magnetic.js, reveal.js, preloader.js, smooth-scroll.js
+  nav.js, magnetic.js, reveal.js, preloader.js, smooth-scroll.js
 src/styles/             base, chrome (Nav/Footer/Cursor), hero, sections
 ```
 
 ## Anpassen
 
 - **Öffnungszeiten, Telefon, Instagram:** `src/data/company.js`
+- **Farben & Typografie:** Variablen oben in `src/styles/base.css`
 - **Einzelne Instagram-Beiträge einbetten:** Beitrags-URLs in `company.instagram.posts` eintragen.
   Sie werden nach dem Klick auf „Live-Feed laden“ unter dem iPhone angezeigt.
 - **Echte Fotos:** Die Vorher/Nachher-Grafiken sind Illustrationen. Für echte Bilder in `compare.js`

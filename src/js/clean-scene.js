@@ -123,20 +123,11 @@ export function initCleanScene() {
       emit(n);
       ctx.globalCompositeOperation = 'lighter';
       const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.laneH * 0.9);
-      g.addColorStop(0, 'rgba(210,240,255,.55)');
-      g.addColorStop(0.25, 'rgba(120,200,255,.18)');
+      g.addColorStop(0, 'rgba(220,240,255,.32)');
+      g.addColorStop(0.3, 'rgba(160,210,240,.08)');
       g.addColorStop(1, 'rgba(120,200,255,0)');
       ctx.fillStyle = g;
       ctx.fillRect(n.x - n.laneH, n.y - n.laneH, n.laneH * 2, n.laneH * 2);
-      // Aufprall-Ringe
-      for (let k = 0; k < 3; k++) {
-        const ph = (time * 2.2 + k / 3) % 1;
-        ctx.strokeStyle = `rgba(200,235,255,${(1 - ph) * 0.35})`;
-        ctx.lineWidth = 1.5 * dpr;
-        ctx.beginPath();
-        ctx.ellipse(n.x, n.y, n.laneH * 0.55 * ph, n.laneH * 0.3 * ph, 0, 0, Math.PI * 2);
-        ctx.stroke();
-      }
     }
 
     for (let k = particles.length - 1; k >= 0; k--) {
@@ -197,12 +188,12 @@ export function initCleanScene() {
   });
 
   tl.fromTo(stage, { rotationX: 52, scale: 1.25, yPercent: 10 }, { rotationX: 14, scale: 1, yPercent: 0, duration: 10 }, 0)
-    .fromTo(caps[0], { autoAlpha: 0, y: 60, filter: 'blur(12px)' }, { autoAlpha: 1, y: 0, filter: 'blur(0px)', duration: 1 }, 0.2)
-    .to(caps[0], { autoAlpha: 0, y: -60, filter: 'blur(12px)', duration: 1 }, 2)
+    .fromTo(caps[0], { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 1 }, 0.2)
+    .to(caps[0], { autoAlpha: 0, y: -40, duration: 1 }, 2)
     .to(state, { p: 1, duration: 6 }, 2.4)
-    .fromTo(caps[1], { autoAlpha: 0, y: 60, filter: 'blur(12px)' }, { autoAlpha: 1, y: 0, filter: 'blur(0px)', duration: 1 }, 3)
-    .to(caps[1], { autoAlpha: 0, y: -60, filter: 'blur(12px)', duration: 1 }, 6.6)
-    .fromTo(caps[2], { autoAlpha: 0, y: 60, scale: 0.9, filter: 'blur(12px)' }, { autoAlpha: 1, y: 0, scale: 1, filter: 'blur(0px)', duration: 1 }, 8.4)
+    .fromTo(caps[1], { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 1 }, 3)
+    .to(caps[1], { autoAlpha: 0, y: -40, duration: 1 }, 6.6)
+    .fromTo(caps[2], { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 1 }, 8.4)
     .fromTo('.clean-scene__meter', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5 }, 2.2)
     .to('.clean-scene__meter', { autoAlpha: 0, duration: 0.5 }, 9)
     .to({}, { duration: 1.5 });
